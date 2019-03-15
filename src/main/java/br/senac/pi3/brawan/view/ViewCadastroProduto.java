@@ -176,6 +176,11 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTProdutoMouseClicked(evt);
+            }
+        });
         jTProduto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTProdutoKeyReleased(evt);
@@ -191,6 +196,11 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
         });
 
         dntExcluir.setText("Excluir");
+        dntExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dntExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -394,17 +404,6 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
     private void jTProdutoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTProdutoKeyReleased
         // TODO add your handling code here:
         
-        if(jTProduto.getSelectedRow() != -1){
-            
-            
-            nomeText.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 1).toString());
-            descricaoText.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 2).toString());
-            compraText.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 3).toString());
-            vendaText.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 4).toString());
-            quantidadeText.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 5).toString());
-            
-            
-        }
         
         
     }//GEN-LAST:event_jTProdutoKeyReleased
@@ -421,12 +420,60 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
         produto.setValorVenda(Float.parseFloat(vendaText.getText()));
         produto.setId((int) jTProduto.getValueAt(jTProduto.getSelectedRow(), 0));
         
+        
         ProdutoDAO.update(produto);
-            
+        
+        idText.setText("");
+        nomeText.setText("");
+        descricaoText.setText("");
+        quantidadeText.setText("");
+        compraText.setText("");
+        vendaText.setText("");
+        readJTable();
             
         
         }
     }//GEN-LAST:event_bntEditarActionPerformed
+
+    private void dntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dntExcluirActionPerformed
+        // TODO add your handling code here:
+        
+        if(jTProduto.getSelectedRow() != -1){
+            
+        Produto produto = new Produto();
+        
+        produto.setId((int) jTProduto.getValueAt(jTProduto.getSelectedRow(), 0));
+        
+        ProdutoDAO.delete(produto);
+        
+        idText.setText("");
+        nomeText.setText("");
+        descricaoText.setText("");
+        quantidadeText.setText("");
+        compraText.setText("");
+        vendaText.setText("");
+            
+        readJTable();
+        
+        }
+    }//GEN-LAST:event_dntExcluirActionPerformed
+
+    private void jTProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProdutoMouseClicked
+        // TODO add your handling code here:
+        
+        if(jTProduto.getSelectedRow() != -1){
+            
+            idText.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 0).toString());
+            nomeText.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 1).toString());
+            descricaoText.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 2).toString());
+            compraText.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 3).toString());
+            vendaText.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 4).toString());
+            quantidadeText.setText(jTProduto.getValueAt(jTProduto.getSelectedRow(), 5).toString());
+            
+            
+        }
+        
+    }//GEN-LAST:event_jTProdutoMouseClicked
 
     /**
      * @param args the command line arguments

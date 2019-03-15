@@ -39,7 +39,7 @@ public class ProdutoDAO {
             stmt.close();
         } 
         catch (SQLException u) { 
-            JOptionPane.showMessageDialog(null, "ERRO AO SALVAR!! "+ u);
+            JOptionPane.showMessageDialog(null, "Erro ao salvar!! "+ u);
         } 
         
     } 
@@ -79,11 +79,11 @@ public class ProdutoDAO {
     public static void update(Produto produto){ 
         Connection connection = Conexao.getConnection();
         PreparedStatement stmt = null;
-        String sql = "UPDATE produto SET nome = ? ,descricao = ? ,quantidade = ? ,preco_compra = ? ,preco_venda= ? WHERE ID = ?";
         
         
         try { 
            
+            stmt = connection.prepareStatement("UPDATE produto SET nome = ? ,descricao = ? ,quantidade = ? ,preco_compra = ? ,preco_venda= ? WHERE ID = ?");
                     
             stmt.setString(1, produto.getNome());
             stmt.setString(2, produto.getDesc());
@@ -97,7 +97,25 @@ public class ProdutoDAO {
             stmt.close();
         } 
         catch (SQLException u) { 
-            JOptionPane.showMessageDialog(null, "ERRO AO ATUALIZAR!! "+ u);
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar o produto!! "+ u);
+        } 
+        
+    } 
+    
+    
+    public static void delete(Produto produto){ 
+        Connection connection = Conexao.getConnection();
+        try { 
+            PreparedStatement stmt = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID =?");
+                   
+            stmt.setInt(1, produto.getId());
+           
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Produto excluido com sucesso!");
+            stmt.close();
+        } 
+        catch (SQLException u) { 
+            JOptionPane.showMessageDialog(null, "Erro ao excluir o produto!! "+ u);
         } 
         
     } 
