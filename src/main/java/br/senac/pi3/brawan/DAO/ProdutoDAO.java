@@ -79,11 +79,11 @@ public class ProdutoDAO {
     public static void update(Produto produto){ 
         Connection connection = Conexao.getConnection();
         PreparedStatement stmt = null;
-        String sql = "UPDATE produto SET nome = ? ,descricao = ? ,quantidade = ? ,preco_compra = ? ,preco_venda= ? WHERE ID = ?";
         
         
         try { 
            
+            stmt = connection.prepareStatement("UPDATE produto SET nome=?,descricao=?,quantidade=? ,preco_compra=?,preco_venda=? WHERE ID=?");
                     
             stmt.setString(1, produto.getNome());
             stmt.setString(2, produto.getDesc());
