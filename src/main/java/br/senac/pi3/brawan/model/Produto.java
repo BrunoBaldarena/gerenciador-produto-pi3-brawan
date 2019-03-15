@@ -5,6 +5,8 @@
  */
 package br.senac.pi3.brawan.model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author Bruno Baldarena
@@ -18,22 +20,9 @@ public class Produto {
     private int id;
     private float valorCompra;
     private float valorVenda;
-    
-
-
-   /* public Produto(categoria categoria, String nome, String desc, int qtd, int id, float valorCompra, float valorVenda){
-       this.categoria = categoria;
-       this.nome=nome;
-       this.desc= desc; 
-       this.qtd = qtd; 
-       this.valorCompra = valorCompra;
-       this.valorVenda = valorVenda;
-    }
-    
-    */
-    /**
-     * @return the nome
-     */
+    private int idCategoria;
+    private String nomeCategoria;
+    private Timestamp data;
     
     
     public String getNome() {
@@ -117,6 +106,55 @@ public class Produto {
         this.valorVenda = valorVenda;
     }
 
+   
+    /**
+     * @return the idCategoria
+     */
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    /**
+     * @param idCategoria the idCategoria to set
+     */
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
+    }
+
+    /**
+     * @return the nomeCategoria
+     */
+    public String getNomeCategoria() {
+        return nomeCategoria;
+    }
+
+    /**
+     * @param nomeCategoria the nomeCategoria to set
+     */
+    public void setNomeCategoria(String nomeCategoria) {
+        this.nomeCategoria = nomeCategoria;
+    }
+
+    @Override
+    public String toString() {
+        return getNomeCategoria(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Timestamp data) {
+        this.data = data;
+    }
+
+    /**
+     * @return the data
+     */
+    public Timestamp getData() {
+        return data;
+    }
+
+    
 
 
     

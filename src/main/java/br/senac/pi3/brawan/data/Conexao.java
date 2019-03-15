@@ -7,6 +7,7 @@ package br.senac.pi3.brawan.data;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,26 +29,6 @@ public class Conexao {
     private static final String PASS = "";
     public Connection conn;// Responsavel por realizar a conexao com o banco de dados
     
-    /*
-    //Metodo realizado para realizar a conexao com o banco de dados
-    public void conexao(){
-        try {
-            System.setProperty("jdbc.drivers", DRIVER_CLASS);
-            conn = DriverManager.getConnection(URL_MYSQL, USER, PASS);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro de conexao! \n Erro: "+ ex.getMessage());
-        }
-    }
-    
-    
-    public void desconecta(){
-        try {
-            conn.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Desconectado com Sucesso! ");
-        }
-    }
-*/
 	public static Connection getConnection() {
 		System.out.println("Conectando ao Banco de Dados");
 		try {
@@ -60,5 +41,45 @@ public class Conexao {
 		}
 		return null;
 	}
+
+        public static void closeConnection(Connection con) {
+        try {
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void closeConnection(Connection con, PreparedStatement stmt) {
+
+        closeConnection(con);
+
+        try {
+
+            if (stmt != null) {
+                stmt.close();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public static void closeConnection(Connection con, PreparedStatement stmt, ResultSet rs) {
+
+        closeConnection(con, stmt);
+
+        try {
+
+            if (rs != null) {
+                rs.close();
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

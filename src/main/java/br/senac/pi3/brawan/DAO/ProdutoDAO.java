@@ -24,14 +24,14 @@ public class ProdutoDAO {
     //Método para cadastrar
     public static void cadastrar(Produto produto){ 
         Connection connection = Conexao.getConnection();
-        String sql = "INSERT INTO produto(nome, descricao,quantidade,preco_compra,preco_venda) VALUES(?,?,?,?,?)";
+        PreparedStatement stmt = null;
+       
         try { 
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt = connection.prepareStatement("INSERT INTO produto(nome, descricao,quantidade,preco_compra,preco_venda) VALUES(?,?,?,?,?)");
                     
             stmt.setString(1, produto.getNome());
             stmt.setString(2, produto.getDesc());
             stmt.setInt(3, produto.getQtd());
-            //stmt.setInt(4, produto.getId());
             stmt.setFloat(4, produto.getValorCompra());
             stmt.setFloat(5, produto.getValorVenda());
             stmt.execute();
@@ -40,21 +40,23 @@ public class ProdutoDAO {
         } 
         catch (SQLException u) { 
             JOptionPane.showMessageDialog(null, "Erro ao salvar!! "+ u);
-        } 
+        } finally {
+            Conexao.closeConnection(connection, stmt);
+        }
         
     } 
     
     //Método para preencher a jTable
     public List<Produto> read(){
         
-        Connection con = Conexao.getConnection();
+        Connection connection = Conexao.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
         List<Produto> produtos = new ArrayList<>();
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM produto");
+            stmt = connection.prepareStatement("SELECT * FROM produto");
             rs = stmt.executeQuery();
             
             while (rs.next()) {                
@@ -65,17 +67,21 @@ public class ProdutoDAO {
                 produto.setValorCompra(rs.getFloat("PRECO_COMPRA"));
                 produto.setValorVenda(rs.getFloat("PRECO_VENDA"));
                 produto.setQtd(rs.getInt("QUANTIDADE"));
+                produto.setData(rs.getTimestamp("DT_CADASTRO"));
                 produtos.add(produto);
             }
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERRO" +ex);
-        }
+        }finally {
+            Conexao.closeConnection(connection, stmt);
            
         
         return produtos;
+        }
     }
     
+    //Método para atualizar os dados da lista
     public static void update(Produto produto){ 
         Connection connection = Conexao.getConnection();
         PreparedStatement stmt = null;
@@ -98,15 +104,17 @@ public class ProdutoDAO {
         } 
         catch (SQLException u) { 
             JOptionPane.showMessageDialog(null, "Erro ao atualizar o produto!! "+ u);
-        } 
-        
+        } finally {
+            Conexao.closeConnection(connection, stmt);
+        }
     } 
     
-    
+    //Método para excluir da lista
     public static void delete(Produto produto){ 
         Connection connection = Conexao.getConnection();
+        PreparedStatement stmt = null;
         try { 
-            PreparedStatement stmt = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID =?");
+            stmt = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID =?");
                    
             stmt.setInt(1, produto.getId());
            
@@ -116,10 +124,48 @@ public class ProdutoDAO {
         } 
         catch (SQLException u) { 
             JOptionPane.showMessageDialog(null, "Erro ao excluir o produto!! "+ u);
-        } 
+        } finally {
+            Conexao.closeConnection(connection, stmt);
+        }
         
     } 
     
+
+    
+    public List<Produto> readCategoria() {
+
+        Connection con = Conexao.getConnection();
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<Produto> produtos = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM categoria ORDER BY id ASC");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Produto produto = new Produto();
+
+                produto.setIdCategoria(rs.getInt("id"));
+                produto.setNomeCategoria(rs.getString("nome"));
+             
+                produtos.add(produto);
+                
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            Conexao.closeConnection(con, stmt, rs);
+        }
+
+        return produtos;
+
+    }
+
 }
 
 
