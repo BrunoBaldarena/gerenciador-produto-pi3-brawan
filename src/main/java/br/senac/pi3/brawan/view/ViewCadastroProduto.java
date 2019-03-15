@@ -26,11 +26,16 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
      */
     
     public ViewCadastroProduto() {
+ 
         initComponents();
         Conexao.getConnection();
         DefaultTableModel modelo = (DefaultTableModel) jTProduto.getModel();
         jTProduto.setRowSorter(new TableRowSorter(modelo));
         readJTable();
+        
+  
+        
+        
         
         ProdutoDAO produto = new ProdutoDAO();
         
@@ -104,6 +109,7 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
         dntExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -111,20 +117,27 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(211, 211, 211));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Produto"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Produto", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 10))); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Nome:");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Descrição:");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("ID:");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Data:");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Preço de compra:");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Preço de Venda:");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Quantidade:");
 
         quantidadeText.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +148,8 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
 
         bntSalvar.setBackground(new java.awt.Color(255, 255, 255));
         bntSalvar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        bntSalvar.setText("Salvar");
+        bntSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salvar.png"))); // NOI18N
+        bntSalvar.setToolTipText("Salvar produto");
         bntSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntSalvarActionPerformed(evt);
@@ -144,29 +158,35 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
 
         bntCancela.setBackground(new java.awt.Color(255, 255, 255));
         bntCancela.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bntCancela.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         bntCancela.setText("Cancelar");
+        bntCancela.setToolTipText("Cancelar");
         bntCancela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntCancelaActionPerformed(evt);
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Categoria:");
 
         bntNovo.setBackground(new java.awt.Color(255, 255, 255));
         bntNovo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bntNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/novo.png"))); // NOI18N
         bntNovo.setText("Novo");
-        bntNovo.setToolTipText("Listar Produtos");
+        bntNovo.setToolTipText("Cadastrar novo produto");
         bntNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntNovoActionPerformed(evt);
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Status:");
 
         comboStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Desabilitado", "Habilitado" }));
 
+        jTProduto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -176,7 +196,7 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -197,7 +217,9 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
 
         bntEditar.setBackground(new java.awt.Color(255, 255, 255));
         bntEditar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        bntEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/alterar.png"))); // NOI18N
         bntEditar.setText("Editar");
+        bntEditar.setToolTipText("Editar Produto");
         bntEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bntEditarActionPerformed(evt);
@@ -206,7 +228,9 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
 
         dntExcluir.setBackground(new java.awt.Color(255, 255, 255));
         dntExcluir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        dntExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/deletar.png"))); // NOI18N
         dntExcluir.setText("Excluir");
+        dntExcluir.setToolTipText("Excluir produto");
         dntExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dntExcluirActionPerformed(evt);
@@ -219,72 +243,58 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(bntNovo)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(bntCancela))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel9))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel1)))
-                            .addGap(4, 4, 4)))
                     .addComponent(jLabel2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel9)))
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(vendaText, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addGap(50, 50, 50)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(compraText, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(dntExcluir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bntEditar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bntSalvar))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(nomeText, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(22, 22, 22)
-                                        .addComponent(jLabel7))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(categoriaText, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 127, Short.MAX_VALUE)
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(dataText, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(quantidadeText, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomeText, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(categoriaText, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(descricaoText, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(2, 2, 2))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(quantidadeText, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dataText, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(bntNovo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntCancela)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dntExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntEditar)
+                        .addGap(199, 199, 199)
+                        .addComponent(bntSalvar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,15 +312,15 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
                         .addComponent(comboStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8)
                         .addComponent(categoriaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(nomeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(quantidadeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -318,7 +328,7 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(descricaoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(vendaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,10 +353,11 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntCancelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntCancelaActionPerformed
@@ -357,6 +368,8 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
         quantidadeText.setText("");
         compraText.setText("");
         vendaText.setText("");
+        categoriaText.setEditable(false);
+        comboStatus.setEditable(false);
         idText.setEditable(false);
         nomeText.setEditable(false);
         quantidadeText.setEditable(false);
@@ -365,6 +378,7 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
         vendaText.setEditable(false);
         categoriaText.setEditable(false);
         comboStatus.setEditable(false);
+        dataText.setEditable(false);
     }//GEN-LAST:event_bntCancelaActionPerformed
 
     private void bntNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntNovoActionPerformed
@@ -382,7 +396,7 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
+        ;
         Date dataSistema = new Date();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/YYYY"); 
         dataText.setText(formato.format(dataSistema));
@@ -411,7 +425,8 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
         
         ProdutoDAO.cadastrar(produto);
         readJTable();
-            
+        
+        idText.setText("");
         nomeText.setText("");
         descricaoText.setText("");
         quantidadeText.setText("");
@@ -420,6 +435,7 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
             
         categoriaText.setEditable(false);
         comboStatus.setEditable(false);
+        idText.setEditable(false);
         nomeText.setEditable(false);
         quantidadeText.setEditable(false);
         descricaoText.setEditable(false);
@@ -427,6 +443,7 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
         vendaText.setEditable(false);
         categoriaText.setEditable(false);
         comboStatus.setEditable(false);
+        dataText.setEditable(false);
         
     }//GEN-LAST:event_bntSalvarActionPerformed
 
@@ -462,6 +479,19 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
         quantidadeText.setText("");
         compraText.setText("");
         vendaText.setText("");
+        
+        categoriaText.setEditable(false);
+        comboStatus.setEditable(false);
+        idText.setEditable(false);
+        nomeText.setEditable(false);
+        quantidadeText.setEditable(false);
+        descricaoText.setEditable(false);
+        compraText.setEditable(false);
+        vendaText.setEditable(false);
+        categoriaText.setEditable(false);
+        comboStatus.setEditable(false);
+        dataText.setEditable(false);
+        
         readJTable();
             
         
@@ -470,6 +500,8 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
 
     private void dntExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dntExcluirActionPerformed
 
+        
+        
         
         if(jTProduto.getSelectedRow() != -1){
        
@@ -485,6 +517,18 @@ public class ViewCadastroProduto extends javax.swing.JFrame {
         quantidadeText.setText("");
         compraText.setText("");
         vendaText.setText("");
+        
+        categoriaText.setEditable(false);
+        comboStatus.setEditable(false);
+        idText.setEditable(false);
+        nomeText.setEditable(false);
+        quantidadeText.setEditable(false);
+        descricaoText.setEditable(false);
+        compraText.setEditable(false);
+        vendaText.setEditable(false);
+        categoriaText.setEditable(false);
+        comboStatus.setEditable(false);
+        dataText.setEditable(false);
             
         readJTable();
         
